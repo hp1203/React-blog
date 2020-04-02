@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({authUser}) => {
 
     return (
 
@@ -23,7 +23,7 @@ const Navbar = () => {
                   <Link className="nav-link" to="/article/create">Write new article</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">Hey Garry!
+                  <a className="nav-link" href="#">Hey {authUser && authUser.user.name}
                     <i className="fa fa-caret-down" />
                   </a>
                   <div className="nav-submenu">
@@ -31,12 +31,18 @@ const Navbar = () => {
                     <a className="nav-link" href>Logout</a>
                   </div>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/auth/login">Login</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/auth/signup">Signup</Link>
-                </li>
+                {
+                  !authUser &&
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/auth/login">Login</Link>
+                  </li>
+                }
+                {
+                  !authUser &&
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/auth/signup">Signup</Link>
+                  </li>
+                }
               </ul>
             </div>
           </div>
